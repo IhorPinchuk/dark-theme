@@ -282,7 +282,7 @@ const btnThemeEl = document.querySelector('.btn-theme');
 const btnThemeIconEl = document.querySelector('.btn-theme-icon use');
 const headerContainerEl = document.querySelector('.header-container');
 console.log(headerContainerEl);
-// console.log(btnThemeIconEl.getAttribute('href'));
+console.log(btnThemeIconEl.getAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href'));
 
 function setDarkTheme() {
 document.body.classList.add('dark');
