@@ -282,11 +282,11 @@ const btnThemeEl = document.querySelector('.btn-theme');
 const btnThemeIconEl = document.querySelector('.btn-theme-icon use');
 const headerContainerEl = document.querySelector('.header-container');
 console.log(headerContainerEl);
-console.log(btnThemeIconEl.getAttribute('href'));
+// console.log(btnThemeIconEl.getAttribute('href'));
 
 function setDarkTheme() {
 document.body.classList.add('dark');
-  btnThemeIconEl.setAttribute('href', './svg-sprite.d9898e17.svg#icon-sun');
+  btnThemeIconEl.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '/src/images/symbol-defs.svg#icon-sun');
   // headerContainerEl.style.backgroundImage = "url('/src/images/header/header-desktop-dark.jpg')";
   headerContainerEl.classList.add("header-container-dark");
     localStorage.theme = 'dark';
@@ -294,7 +294,7 @@ document.body.classList.add('dark');
 
 function setLightTheme() {
 document.body.classList.remove('dark');
-  btnThemeIconEl.setAttribute('href', './svg-sprite.d9898e17.svg#icon-moon');
+  btnThemeIconEl.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '/src/images/symbol-defs.svg#icon-moon');
   headerContainerEl.classList.remove("header-container-dark");
     localStorage.theme = 'light';
 }
