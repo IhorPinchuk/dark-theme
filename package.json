@@ -2,10 +2,10 @@
   "name": "parcel-project-template",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://MoskaletsOleksandr.github.io/team-project-java-script-group-2",
+  "homepage": "https://IhorPinchuk.github.io/dark-theme",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /team-project-java-script-group-2/"
+    "build": "parcel build src/*.html --public-url /dark-theme/"
   },
   "repository": {
     "type": "git",
