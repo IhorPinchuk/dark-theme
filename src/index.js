@@ -285,7 +285,7 @@ console.log(headerContainerEl);
 
 function setDarkTheme() {
 document.body.classList.add('dark');
-  btnThemeIconEl.setAttribute('href', '/svg-sprite.d9898e17.svg#icon-sun');
+  btnThemeIconEl.setAttribute('href', '/src/images/svg-sprite.svg#icon-sun');
   // headerContainerEl.style.backgroundImage = "url('/src/images/header/header-desktop-dark.jpg')";
   headerContainerEl.classList.add("header-container-dark");
     localStorage.theme = 'dark';
@@ -293,7 +293,7 @@ document.body.classList.add('dark');
 
 function setLightTheme() {
 document.body.classList.remove('dark');
-  btnThemeIconEl.setAttribute('href', '/svg-sprite.d9898e17.svg#icon-moon');
+  btnThemeIconEl.setAttribute('href', '/src/images/svg-sprite.svg#icon-moon');
   headerContainerEl.classList.remove("header-container-dark");
     localStorage.theme = 'light';
 }
