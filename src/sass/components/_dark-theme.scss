@@ -1,11 +1,6 @@
 body {
   background-color: var(--body-bg-color);
   transition: background-color var(--animation);
-
-  animation-duration: 2s;
-  animation-name: slidein-light;
-  animation-iteration-count: 1;
-  animation-direction: normal;
 }
 
 body.dark {
