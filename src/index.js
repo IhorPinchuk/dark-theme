@@ -1,4 +1,8 @@
 //імпортуємо бібліотеки та інші файли
+import './js/createGallery';
+import './js/onSearch';
+import './js/pagination'
+import './js/btnUp';
 import { fetchTrendMoves, fetchDataById, fetchMovesByKeyword } from './js/api';
 import {
   createTrendMovesMarkup,
@@ -7,7 +11,7 @@ import {
 import throttle from 'lodash.throttle'; // npm i lodash.throttle
 import { createMoveModalMarkup } from './js/create-modal-markup';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
+import refs from './js/refs';
 //
 //
 //
@@ -22,24 +26,24 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 //
 //
 // refs
-const refs = {
-  searchFormEl: document.querySelector('.form-search'),
-  searchInputEl: document.querySelector('.input-search'),
-  galleryContainerEl: document.querySelector('.gallery-container'),
-  galleryListEl: document.querySelector('.gallery-list'),
-  aboutTeamBtn: document.querySelector('.about-team'),
-  btnUpEl: document.querySelector('.btn-up'),
-  bodyEl: document.querySelector('body'),
-  backdropMovieModal: document.querySelector('.backdrop'),
-  movieModalEl: document.querySelector('div[data-movie-modal]'),
-  movieModalFilmInfoEl: document.querySelector('.js-film-info'),
-  modalCloseBtn: document.querySelector('button[data-movie-modal-close]'),
-  // addToWatchedBtn: document.querySelector('button[data-btn-to-watched]'),
-  //   addToQueueBtn: document.querySelector('button[data-btn-to-queue]'),
-  teamModalOpenBtn: document.querySelector('button[data-team-modal-open]'),
-  teamModalCloseBtn: document.querySelector('button[data-team-modal-close]'),
-  teamModal: document.querySelector('div[data-team-modal]'),
-};
+// const refs = {
+//   searchFormEl: document.querySelector('.form-search'),
+//   searchInputEl: document.querySelector('.input-search'),
+//   galleryContainerEl: document.querySelector('.gallery-container'),
+//   galleryListEl: document.querySelector('.gallery-list'),
+//   aboutTeamBtn: document.querySelector('.about-team'),
+//   btnUpEl: document.querySelector('.btn-up'),
+//   bodyEl: document.querySelector('body'),
+//   backdropMovieModal: document.querySelector('.backdrop'),
+//   movieModalEl: document.querySelector('div[data-movie-modal]'),
+//   movieModalFilmInfoEl: document.querySelector('.js-film-info'),
+//   modalCloseBtn: document.querySelector('button[data-movie-modal-close]'),
+//   // addToWatchedBtn: document.querySelector('button[data-btn-to-watched]'),
+//   //   addToQueueBtn: document.querySelector('button[data-btn-to-queue]'),
+//   teamModalOpenBtn: document.querySelector('button[data-team-modal-open]'),
+//   teamModalCloseBtn: document.querySelector('button[data-team-modal-close]'),
+//   teamModal: document.querySelector('div[data-team-modal]'),
+// };
 //
 //
 let movieIdForModalMarkup = null; //При натисканні на картку фільму на головній сторінці сюди заисується id
@@ -49,7 +53,7 @@ export let dataForModalMarkup = null; //Об'єкт із повною інфор
 // Цей об'єкт перезаписується щоразу після натискання на картку
 
 //Аліна присяжнюк
-//
+
 const headerEl = document.querySelector('.header');
 const headerContainer = document.querySelector('.header-container');
 const logoHeader = document.querySelector('.header-logo');
@@ -78,9 +82,9 @@ function onScrollHeader() {
 }
 
 window.addEventListener('scroll', onScrollHeader);
-//
-//
-//
+
+
+
 //
 //
 //
@@ -247,37 +251,36 @@ window.addEventListener('scroll', onScrollHeader);
 //
 //
 //
-//
 //Ігор
 //
 // ------- btnUp -------
 
-refs.btnUpEl.addEventListener('click', scrollUp);
+// refs.btnUpEl.addEventListener('click', scrollUp);
 
-function show() {
-  refs.btnUpEl.classList.remove('btn-up_hide');
-}
+// function show() {
+//   refs.btnUpEl.classList.remove('btn-up_hide');
+// }
 
-function hide() {
-  refs.btnUpEl.classList.add('btn-up_hide');
-}
+// function hide() {
+//   refs.btnUpEl.classList.add('btn-up_hide');
+// }
 
-window.addEventListener(
-  'scroll',
-  throttle(() => {
-    const scrollY = window.scrollY || document.documentElement.scrollTop;
+// window.addEventListener(
+//   'scroll',
+//   throttle(() => {
+//     const scrollY = window.scrollY || document.documentElement.scrollTop;
 
-    scrollY > 400 ? show() : hide();
-  }, 500)
-);
+//     scrollY > 400 ? show() : hide();
+//   }, 500)
+// );
 
-function scrollUp() {
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: 'smooth',
-  });
-}
+// function scrollUp() {
+//   window.scrollTo({
+//     top: 0,
+//     left: 0,
+//     behavior: 'smooth',
+//   });
+// }
 //
 //------- btnTheme -------
 //
@@ -323,13 +326,6 @@ btnThemeEl.addEventListener('click', () => {
 if (localStorage.theme === 'dark') {
   setDarkTheme();
 }
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -592,44 +588,44 @@ refs.movieModalEl.addEventListener('click', handleMakeBtnAddRemoveQueue);
 //
 //
 //
-//Денис
-function renderMarkup(array) {
-  const markup = createTrendMovesMarkup(array);
-  refs.galleryListEl.innerHTML = '';
-  refs.galleryListEl.insertAdjacentHTML('beforeend', markup);
-}
-fetchTrendMoves()
-  .then(data => {
-    createTrailerIdAndKeysArray(data);
-    setTimeout(() => {
-      renderMarkup(data);
-    }, 300);
-  })
-  .catch(error => console.log(error));
+// Денис
+// function renderMarkup(array) {
+//   const markup = createTrendMovesMarkup(array);
+//   refs.galleryListEl.innerHTML = '';
+//   refs.galleryListEl.insertAdjacentHTML('beforeend', markup);
+// }
+// fetchTrendMoves()
+//   .then(data => {
+//     createTrailerIdAndKeysArray(data);
+//     setTimeout(() => {
+//       renderMarkup(data);
+//     }, 300);
+//   })
+//   .catch(error => console.log(error));
 
-refs.searchFormEl.addEventListener('submit', handleClickSearchButton);
+// refs.searchFormEl.addEventListener('submit', handleClickSearchButton);
 
-function handleClickSearchButton(e) {
-  e.preventDefault();
-  const inputData = refs.searchInputEl.value;
-  if (inputData === '') {
-    Notify.failure('Input is empty');
-    return;
-  }
-  fetchMovesByKeyword(inputData.trim())
-    .then(data => {
-      if (data.results.length === 0) {
-        Notify.failure('No results for your search');
-        return;
-      }
-      createTrailerIdAndKeysArray(data);
-      setTimeout(() => {
-        renderMarkup(data);
-      }, 300);
-      scrollUp();
-    })
-    .catch(error => console.log(error));
-}
+// function handleClickSearchButton(e) {
+//   e.preventDefault();
+//   const inputData = refs.searchInputEl.value;
+//   if (inputData === '') {
+//     Notify.failure('Input is empty');
+//     return;
+//   }
+//   fetchMovesByKeyword(inputData.trim())
+//     .then(data => {
+//       if (data.results.length === 0) {
+//         Notify.failure('No results for your search');
+//         return;
+//       }
+//       createTrailerIdAndKeysArray(data);
+//       setTimeout(() => {
+//         renderMarkup(data);
+//       }, 300);
+//       scrollUp();
+//     })
+//     .catch(error => console.log(error));
+// }
 //
 //
 //

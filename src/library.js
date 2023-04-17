@@ -1,6 +1,6 @@
 //імпортуємо бібліотеки та інші файли
+import './js/btnUp';
 import throttle from 'lodash.throttle'; // npm i lodash.throttle
-//
 //
 //
 //
@@ -50,36 +50,34 @@ const refs = {
 //
 //
 //Аліна присяжнюк дещо сплутала
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+const headerEl = document.querySelector('.header');
+const headerContainer = document.querySelector('.header-container');
+const logoHeader = document.querySelector('.header-logo');
+const logoTextHeader = document.querySelector('.header-text-logo');
+const iconFilmHeader = document.querySelector('.icon-film');
+//const searchBox = document.querySelector('.search');
+let positionHeader = headerEl.offsetTop;
+function onScrollHeader() {
+  if (window.pageYOffset > positionHeader) {
+    headerEl.classList.add('fixed');
+    headerContainer.classList.add('fixed-header');
+    logoHeader.classList.add('fixed-logo');
+    logoTextHeader.classList.add('text-logo-fixed');
+    // iconFilmHeader.classList.add('icon-film-fixed');
+    //searchBox.classList.add('fixed-search');
+  } else {
+    headerEl.classList.remove('fixed');
+    headerContainer.classList.remove('fixed-header');
+    headerContainer.classList.remove('fixed-header-dark');
+    logoHeader.classList.remove('fixed-logo');
+  }
+
+  if (window.pageYOffset > positionHeader && localStorage.theme === 'dark') {
+    headerContainer.classList.add('fixed-header-dark');
+  }
+}
+
+window.addEventListener('scroll', onScrollHeader);
 //
 //
 //
@@ -253,32 +251,32 @@ const refs = {
 //
 // ------- btnUp -------
 //
-refs.btnUpEl.addEventListener('click', scrollUp);
+// refs.btnUpEl.addEventListener('click', scrollUp);
 
-function show() {
-  refs.btnUpEl.classList.remove('btn-up_hide');
-}
+// function show() {
+//   refs.btnUpEl.classList.remove('btn-up_hide');
+// }
 
-function hide() {
-  refs.btnUpEl.classList.add('btn-up_hide');
-}
+// function hide() {
+//   refs.btnUpEl.classList.add('btn-up_hide');
+// }
 
-window.addEventListener(
-  'scroll',
-  throttle(() => {
-    const scrollY = window.scrollY || document.documentElement.scrollTop;
+// window.addEventListener(
+//   'scroll',
+//   throttle(() => {
+//     const scrollY = window.scrollY || document.documentElement.scrollTop;
 
-    scrollY > 400 ? show() : hide();
-  }, 500)
-);
+//     scrollY > 400 ? show() : hide();
+//   }, 500)
+// );
 
-function scrollUp() {
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: 'smooth',
-  });
-}
+// function scrollUp() {
+//   window.scrollTo({
+//     top: 0,
+//     left: 0,
+//     behavior: 'smooth',
+//   });
+// }
 //
 //------- btnTheme -------
 //
@@ -292,6 +290,7 @@ function setDarkTheme() {
 
   btnIconSunEl.classList.remove('btn-icon-hidden');
   btnIconMoonEl.classList.add('btn-icon-hidden');
+  headerContainerEl.classList.remove('header-container');
   headerContainerEl.classList.add('header-container-dark');
   localStorage.theme = 'dark';
 }
@@ -302,6 +301,7 @@ function setLightTheme() {
   btnIconMoonEl.classList.remove('btn-icon-hidden');
   btnIconSunEl.classList.add('btn-icon-hidden');
   headerContainerEl.classList.remove('header-container-dark');
+  headerContainerEl.classList.add('header-container');
   localStorage.theme = 'light';
 }
 
@@ -311,19 +311,17 @@ btnThemeEl.addEventListener('click', () => {
   } else {
     setDarkTheme();
   }
+
+  if (localStorage.theme === 'dark' && window.pageYOffset > positionHeader) {
+    headerContainer.classList.add('fixed-header-dark');
+  } else {
+    headerContainer.classList.remove('fixed-header-dark');
+  }
 });
 
 if (localStorage.theme === 'dark') {
   setDarkTheme();
 }
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -848,7 +846,7 @@ if (localStorage.theme === 'dark') {
 //
 //
 //Ірина
-import { createLibraryMarkup } from "./js/createLibraryMarkup.js";
+import { createLibraryMarkup } from './js/createLibraryMarkup.js';
 
 const watchedBtn = document.querySelector('.watched-btn');
 const queueBtn = document.querySelector('.queue-btn');
@@ -862,7 +860,6 @@ let watchedFilms = [];
 let queueFilms = [];
 
 function handleWatchedBtn() {
-
   nothingContainer.style.display = 'none';
 
   watchedFilms = JSON.parse(localStorage.getItem('watched')) || [];
@@ -870,7 +867,7 @@ function handleWatchedBtn() {
 
   if (watchedFilms.length <= 0) {
     nothingContainer.style.display = 'block';
-    galleryContainerEl.innerHTML = "";
+    galleryContainerEl.innerHTML = '';
     return;
   }
 
@@ -879,18 +876,17 @@ function handleWatchedBtn() {
 }
 
 function handleQueueBtn() {
-
   queueFilms = JSON.parse(localStorage.getItem('queue')) || [];
 
   nothingContainer.style.display = 'none';
 
   if (queueFilms.length <= 0) {
     nothingContainer.style.display = 'block';
-     galleryContainerEl.innerHTML = "";
+    galleryContainerEl.innerHTML = '';
     return;
   }
   const markup = createLibraryMarkup(queueFilms);
-  galleryContainerEl.innerHTML = markup;;
+  galleryContainerEl.innerHTML = markup;
 }
 
 handleWatchedBtn();
