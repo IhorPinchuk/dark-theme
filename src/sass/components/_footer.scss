@@ -1,0 +1,77 @@
+.heart-svg {
+  animation-name: heartScale;
+  animation-duration: 1000ms;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.team-btn {
+  text-decoration: none;
+  align-items: center;
+  display: flex;
+  transition: all .25s cubic-bezier(.4,0,.2,1);
+font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+  
+  display: flex;
+  align-items: center;
+  text-align: center;
+  
+  color: var(--footer-text-color);
+}
+
+
+.footer {
+  display: flex;
+  align-items: center;
+ }
+
+.footer-text {
+  display: block;
+  
+}
+
+.footer-container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+ text-align: center;
+ align-items: center;
+ font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+  
+  display: flex;
+  align-items: center;
+  text-align: center;
+  
+  color: var(--footer-text-color);
+}
+
+
+@keyframes heartScale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+
+
