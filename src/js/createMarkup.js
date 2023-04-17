@@ -1,4 +1,4 @@
-const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w400';
+let BASE_IMG_URL = 'https://image.tmdb.org/t/p/w400';
 const GENRES = [
   { id: 28, name: 'Action' },
   { id: 12, name: 'Adventure' },
@@ -44,23 +44,39 @@ function cutGenresArray(array) {
 
 export function createTrendMovesMarkup({ results }) {
   return results
-    .map(({ backdrop_path, genre_ids, release_date, title }) => {
-      let genresArray = createGenresArray(genre_ids);
-      genresArray = cutGenresArray(createGenresArray(genre_ids));
+    .map(({ poster_path, genre_ids, release_date, title, id }) => {
+      BASE_IMG_URL = 'https://image.tmdb.org/t/p/w400';
+      if (poster_path === null) {
+        BASE_IMG_URL = '';
+        poster_path =
+          'https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-for-website-design-or-mobile-app-no-photo-available_87543-11093.jpg?w=1480';
+      }
 
-      return `<ul class="gallery-list">
-                <li class="gallery-item">
-                    <div class="gallery-card">
-                        <img src="${BASE_IMG_URL}${backdrop_path}" width="395" alt="${title}">
-                        <button class="trailer-button" type="button">Trailer</button>
-                        <h3 class="film-title">${title}</h3>
-                        <span class="film-genres">${genresArray}</span> | <span class="film-year">${release_date.slice(
+      if (release_date === '') {
+        release_date = 'None';
+      }
+      let genresArray = createGenresArray(genre_ids);
+      genresArray = cutGenresArray(genresArray);
+
+      if (genresArray.length === 0) {
+        genresArray = 'Unknown genres';
+      }
+
+      return `<li class="gallery-item">
+                    <div class="gallery-container-img" data-id='${id}'>
+                    <div class="gallery-card" data-id='${id}'>
+                        <img class="gallery-img" src="${BASE_IMG_URL}${poster_path}" alt="${title}">
+                        <button class="trailer-button" type="button">Trailer</button> 
+                        </div>
+                        <div class="gallery-film" data-id='${id}'>
+                        <h3 class="film-title">${title}
+                        </h3>
+                        <span class="film-genres">${genresArray}</span><span class="film-year"> | ${release_date.slice(
         0,
         4
-      )}</span>
+      )}</span></div>
                     </div>
-                </li>
-            </ul>`;
+                </li>`;
     })
     .join('');
 }
