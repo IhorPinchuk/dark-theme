@@ -64,22 +64,19 @@ function onScrollHeader() {
     logoTextHeader.classList.add('text-logo-fixed');
     iconFilmHeader.classList.add('icon-film-fixed');
     //searchBox.classList.add('fixed-search');
-  } else if (localStorage.theme === 'dark' && window.pageYOffset > positionHeader) {
-    headerContainer.classList.add('fixed-header-dark');
   } else {
     headerEl.classList.remove('fixed');
     headerContainer.classList.remove('fixed-header');
     headerContainer.classList.remove('fixed-header-dark');
     logoHeader.classList.remove('fixed-logo');
   }
+
+  if (window.pageYOffset > positionHeader && localStorage.theme === 'dark') {
+    headerContainer.classList.add('fixed-header-dark');
+  }
 }
 
 window.addEventListener('scroll', onScrollHeader);
-//
-//
-//
-//
-//
 //
 //
 //
@@ -315,14 +312,6 @@ btnThemeEl.addEventListener('click', () => {
     setDarkTheme();
   }
 
-  // if (localStorage.theme === 'light' && window.pageYOffset > positionHeader) {
-  //   headerContainer.classList.add('fixed-header');
-  //   headerContainer.classList.remove('fixed-header-dark');
-  // } else {
-  //   headerContainer.classList.add('fixed-header-dark');
-  //   headerContainer.classList.remove('fixed-header');
-  // }
-
   if (localStorage.theme === 'dark' && window.pageYOffset > positionHeader) {
         headerContainer.classList.add('fixed-header-dark');
   } else {
@@ -333,32 +322,6 @@ btnThemeEl.addEventListener('click', () => {
 if (localStorage.theme === 'dark') {
   setDarkTheme();
 }
-//
-// function onScrollHeaderDarkTheme() {
-//   if (window.pageYOffset > positionHeader && localStorage.theme === 'dark') {
-//     // headerEl.classList.add('fixed');
-//     // headerEl.classList.remove('fixed-header');
-//     headerContainer.classList.add('fixed-header-dark');
-//     // logoHeader.classList.add('fixed-logo');
-//     // logoTextHeader.classList.add('text-logo-fixed');
-//     // iconFilmHeader.classList.add('icon-film-fixed');
-//     //searchBox.classList.add('fixed-search');
-//   } else {
-//     // headerEl.classList.remove('fixed');
-//     headerContainer.classList.remove('fixed-header-dark');
-//     // logoHeader.classList.remove('fixed-logo');
-//   }
-// }
-
-// window.addEventListener('scroll', onScrollHeaderDarkTheme);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
